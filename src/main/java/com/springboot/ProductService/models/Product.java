@@ -1,5 +1,6 @@
 package com.springboot.ProductService.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
@@ -9,11 +10,10 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Product extends BaseModel{
-    private Long id;
     private String title;
     private String description;
     private double price;
     private String imageURL;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     private Category categoryName;
 }
