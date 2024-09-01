@@ -8,12 +8,12 @@ import java.util.List;
 
 public class ProductServiceFakestoreImpl implements ProductService{
     @Override
-    public Product crateProduct(Product product) {
+    public Product createProduct(Product product) {
         return null;
     }
 
     @Override
-    public List<Product> getProducts() {
+    public List<Product> getAllProducts() {
         return null;
     }
 
@@ -21,4 +21,5 @@ public class ProductServiceFakestoreImpl implements ProductService{
     public Product particalUpdateProduct(Long id, Product product) throws ProductNotFoundException {
         return null;
     }
+   // Product particalUpdateProduct(Long id, Product product) throws ProductNotFoundException;
 }

@@ -6,7 +6,7 @@ import com.springboot.ProductService.models.Product;
 import java.util.List;
 
 public interface ProductService {
-    Product crateProduct(Product product);
-    List<Product> getProducts();
+    Product createProduct(Product product);
+    List<Product> getAllProducts();
     Product particalUpdateProduct(Long id, Product product) throws ProductNotFoundException;
 }

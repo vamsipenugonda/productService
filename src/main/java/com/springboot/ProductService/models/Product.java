@@ -15,5 +15,5 @@ public class Product extends BaseModel{
     private double price;
     private String imageURL;
     @ManyToOne(cascade = {CascadeType.PERSIST})
-    private Category categoryName;
+    private Category category;
 }

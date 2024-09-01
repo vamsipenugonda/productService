@@ -1,13 +1,14 @@
 package com.springboot.ProductService.controllers;
 
-import com.springboot.ProductService.dtos.Product.CreateProductDTO;
-import com.springboot.ProductService.dtos.Product.GetAllResponseDTO;
-import com.springboot.ProductService.dtos.Product.PatchProductResponseDTO;
+import com.springboot.ProductService.dtos.Product.*;
 import com.springboot.ProductService.exceptions.ProductNotFoundException;
 import com.springboot.ProductService.models.Product;
 import com.springboot.ProductService.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -18,12 +19,25 @@ public class ProductController {
         this.productService = productService;
     }
     @PostMapping("/products")
-    public void createProduct(@RequestBody CreateProductDTO createProductDTO){
+    public CreateProductResponseDTO createProduct(@RequestBody CreateProductRequestDTO createProductRequestDTO){
+        Product product = productService.createProduct(createProductRequestDTO.toProduct());
+        return CreateProductResponseDTO.fromProduct(product);
     }
 
     @GetMapping("")
-    public GetAllResponseDTO getAllProducts(){
-        return null;
+    public GetAllProductsResponseDTO getAllProducts(){
+        List<Product> products = productService.getAllProducts();
+        GetAllProductsResponseDTO response = new GetAllProductsResponseDTO();
+
+        List<GetProductDTO> getProductResponseDtos = new ArrayList<>();
+
+        for (Product product: products) {
+            getProductResponseDtos.add(GetProductDTO.from(product));
+        }
+
+        response.setProducts(getProductResponseDtos);
+
+        return response;
     }
 
     @GetMapping("/{id}")
@@ -41,7 +55,16 @@ public class ProductController {
 
             @RequestBody CreateProductDTO createProductDTO) throws ProductNotFoundException
     {
-        return null;
+//        Product product = productService.partialUpdateProduct(
+//                productId,
+//                productDto.toProduct()
+//        );
+//
+//        PatchProductResponseDTO response = new PatchProductResponseDTO();
+//        response.setProduct(GetProductDto.from(product));
+//
+//        return response;
+        return  null;
     }
 
     @PutMapping("/{id}")
