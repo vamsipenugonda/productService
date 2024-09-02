@@ -12,8 +12,8 @@ import java.util.Optional;
 
 @Service("dbProductService")
 public class ProductServiceDBImpl implements ProductService {
-    private ProductRepository productRepository;
-    private CategoryRepository categoryRepository;
+    private  ProductRepository productRepository;
+    private  CategoryRepository categoryRepository;
 
     public ProductServiceDBImpl(ProductRepository productRepository,
                                 CategoryRepository categoryRepository) {

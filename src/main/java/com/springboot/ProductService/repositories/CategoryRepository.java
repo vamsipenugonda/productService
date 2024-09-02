@@ -2,6 +2,7 @@ package com.springboot.ProductService.repositories;
 
 import com.springboot.ProductService.models.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.Optional;
 

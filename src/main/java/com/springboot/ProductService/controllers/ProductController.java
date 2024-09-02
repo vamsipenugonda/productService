@@ -15,7 +15,7 @@ import java.util.List;
 public class ProductController {
     private ProductService productService;
 
-    public ProductController(@Qualifier("dbProductService")ProductService productService){
+    public ProductController(@Qualifier("dbProductService") ProductService productService){
         this.productService = productService;
     }
     @PostMapping("/products")

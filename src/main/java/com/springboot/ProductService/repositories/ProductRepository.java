@@ -16,13 +16,13 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 
     @Override
     void delete(Product product);
-
+    @Override
     List<Product> findAll();
 
     @Override
     Optional<Product> findById(Long id);
 
-    List<Product> findAllByCategory_Subcategories_SurnameEquals(String subcategorySurname);
+    List<Product> findAllByCategory_Subcategories_nameEquals(String subcategorySurname);
 
 
 }
