@@ -50,21 +50,18 @@ public class ProductController {
     }
 
     @PatchMapping("/{id}")
-    public PatchProductResponseDTO patchProduct(
-            @PathVariable Long id,
-
-            @RequestBody CreateProductDTO createProductDTO) throws ProductNotFoundException
+    public PatchProductResponseDTO updateProduct(
+            @PathVariable Long productId,
+            @RequestBody CreateProductDTO productDto) throws ProductNotFoundException
     {
-//        Product product = productService.partialUpdateProduct(
-//                productId,
-//                productDto.toProduct()
-//        );
-//
-//        PatchProductResponseDTO response = new PatchProductResponseDTO();
-//        response.setProduct(GetProductDto.from(product));
-//
-//        return response;
-        return  null;
+        Product product = productService.partialUpdateProduct(
+                productId,
+                productDto.toProduct()
+        );
+        PatchProductResponseDTO response = new PatchProductResponseDTO();
+        response.setProduct(GetProductDTO.from(product));
+
+        return response;
     }
 
     @PutMapping("/{id}")
@@ -73,6 +70,12 @@ public class ProductController {
             @RequestBody CreateProductDTO createProductDTO) throws ProductNotFoundException
     {
     }
-
-
 }
+/*
+* post-done
+* getAll-done
+* getId
+* delete
+* patch-done
+* put
+* */

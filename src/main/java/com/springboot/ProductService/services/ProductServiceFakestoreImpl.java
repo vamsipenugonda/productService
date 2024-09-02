@@ -18,7 +18,7 @@ public class ProductServiceFakestoreImpl implements ProductService{
     }
 
     @Override
-    public Product particalUpdateProduct(Long id, Product product) throws ProductNotFoundException {
+    public Product partialUpdateProduct(Long id, Product product) throws ProductNotFoundException {
         return null;
     }
    // Product particalUpdateProduct(Long id, Product product) throws ProductNotFoundException;

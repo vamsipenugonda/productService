@@ -23,51 +23,41 @@ public class ProductServiceDBImpl implements ProductService {
     @Override
     public Product createProduct(Product product) {
         Category toBePutInProduct = getCategoryToBeInProduct(product);
-
         product.setCategory(toBePutInProduct);
-
         Product savedProduct = productRepository.save(product);
-        System.out.println("hahahhahaha");
-
         return savedProduct;
     }
 
     @Override
     public List<Product> getAllProducts() {
-        return null;
+        return productRepository.findAll();
     }
+
     @Override
-    public Product particalUpdateProduct(Long productId,
+    public Product partialUpdateProduct(Long productId,
                                         Product product) throws ProductNotFoundException {
 
         Optional<Product> productToUpdateOptional = productRepository.findById(productId);
-
         if (productToUpdateOptional.isEmpty()) {
             throw new ProductNotFoundException();
         }
-
         Product productToUpdate = productToUpdateOptional.get();
-
         if (product.getDescription() != null) {
             productToUpdate.setDescription(product.getDescription());
         }
-
-//        if (product.getPrice() != null) {
-//            productToUpdate.setPrice(product.getPrice());
-//        }
-
+        if (product.getPrice() != 0) {//null
+            productToUpdate.setPrice(product.getPrice());
+        }
         if (product.getTitle() != null) {
             productToUpdate.setTitle(product.getTitle());
         }
-
         if (product.getCategory() != null) {
             Category toBePutInProduct = getCategoryToBeInProduct(product);
-
             productToUpdate.setCategory(toBePutInProduct);
         }
-
         return productRepository.save(productToUpdate);
     }
+
     private Category getCategoryToBeInProduct(Product product) {
         String categoryName = product.getCategory().getName();
 
