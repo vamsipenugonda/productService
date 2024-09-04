@@ -5,6 +5,7 @@ import com.springboot.ProductService.exceptions.ProductNotFoundException;
 import com.springboot.ProductService.models.Product;
 import com.springboot.ProductService.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -41,12 +42,20 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public Product getProduct(@PathVariable Long id){
+    public GetProductDTO getProduct(@PathVariable Long id){
+        Product product=productService.getProduct(id);
+        if(product!=null){
+            return GetProductDTO.from(product);
+        }
         return null;
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable Long id){
+    public Boolean deleteProduct(@PathVariable Long id) throws ProductNotFoundException {
+        if(productService.deleteProduct(id)){
+            return true;
+        }
+        return false;
     }
 
     @PatchMapping("/{id}")
@@ -65,17 +74,19 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public void putProduct(
+    public ResponseEntity<Product> putProduct(
             @PathVariable Long id,
             @RequestBody CreateProductDTO createProductDTO) throws ProductNotFoundException
     {
+        Product product =productService.putProduct(id, createProductDTO.toProduct());
+        return ResponseEntity.ok(product);
     }
 }
 /*
 * post-done
 * getAll-done
-* getId
-* delete
+* getId-done
+* delete-done
 * patch-done
-* put
+* put-done
 * */

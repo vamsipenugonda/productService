@@ -75,4 +75,36 @@ public class ProductServiceDBImpl implements ProductService {
         }
         return toBePutInProduct;
     }
+    @Override
+    public Product getProduct(Long id) {
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isEmpty()) {
+            return null;
+        }
+        return product.get();
+    }
+    @Override
+    public Product putProduct(Long id,Product product) throws ProductNotFoundException {
+        Optional<Product> productToUpdateOptional = productRepository.findById(id);
+        if (productToUpdateOptional.isEmpty()) {
+            throw new ProductNotFoundException();
+        }
+        Product productToUpdate = productToUpdateOptional.get();
+        productToUpdate.setDescription(product.getDescription());
+        productToUpdate.setPrice(product.getPrice());
+        productToUpdate.setTitle(product.getTitle());
+        Category toBePutInProduct = getCategoryToBeInProduct(product);
+        productToUpdate.setCategory(toBePutInProduct);
+        return productRepository.save(productToUpdate);
+    }
+    @Override
+    public boolean deleteProduct(Long id) throws ProductNotFoundException {
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isEmpty()) {
+            throw new ProductNotFoundException();
+        }
+        productRepository.delete(product.get());
+        return true;
+    }
+
 }
