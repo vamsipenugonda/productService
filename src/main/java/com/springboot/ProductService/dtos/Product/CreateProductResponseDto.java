@@ -6,14 +6,14 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class CreateProductResponseDTO {
+public class CreateProductResponseDto {
     private Long id;
     private String title;
     private String description;
     private double price;
     private String imageUrl;
-    public static CreateProductResponseDTO fromProduct(Product product) {
-        CreateProductResponseDTO responseDto = new CreateProductResponseDTO();
+    public static CreateProductResponseDto fromProduct(Product product) {
+        CreateProductResponseDto responseDto = new CreateProductResponseDto();
         responseDto.setId(product.getId());
         responseDto.setDescription(product.getDescription());
         responseDto.setTitle(product.getTitle());

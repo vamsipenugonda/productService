@@ -3,7 +3,7 @@ package com.springboot.ProductService.dtos.Product;
 import com.springboot.ProductService.models.Category;
 import com.springboot.ProductService.models.Product;
 
-public class CreateProductRequestDTO {
+public class CreateProductRequestDto {
     private String title;
     private String description;
     private double price;

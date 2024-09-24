@@ -20,20 +20,20 @@ public class ProductController {
         this.productService = productService;
     }
     @PostMapping("/products")
-    public CreateProductResponseDTO createProduct(@RequestBody CreateProductRequestDTO createProductRequestDTO){
+    public CreateProductResponseDto createProduct(@RequestBody CreateProductRequestDto createProductRequestDTO){
         Product product = productService.createProduct(createProductRequestDTO.toProduct());
-        return CreateProductResponseDTO.fromProduct(product);
+        return CreateProductResponseDto.fromProduct(product);
     }
 
     @GetMapping("")
-    public GetAllProductsResponseDTO getAllProducts(){
+    public GetAllProductsResponseDto getAllProducts(){
         List<Product> products = productService.getAllProducts();
-        GetAllProductsResponseDTO response = new GetAllProductsResponseDTO();
+        GetAllProductsResponseDto response = new GetAllProductsResponseDto();
 
-        List<GetProductDTO> getProductResponseDtos = new ArrayList<>();
+        List<GetProductDto> getProductResponseDtos = new ArrayList<>();
 
         for (Product product: products) {
-            getProductResponseDtos.add(GetProductDTO.from(product));
+            getProductResponseDtos.add(GetProductDto.from(product));
         }
 
         response.setProducts(getProductResponseDtos);
@@ -42,10 +42,10 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public GetProductDTO getProduct(@PathVariable Long id){
+    public GetProductDto getProduct(@PathVariable Long id){
         Product product=productService.getProduct(id);
         if(product!=null){
-            return GetProductDTO.from(product);
+            return GetProductDto.from(product);
         }
         return null;
     }
@@ -59,16 +59,16 @@ public class ProductController {
     }
 
     @PatchMapping("/{id}")
-    public PatchProductResponseDTO updateProduct(
+    public PatchProductResponseDto updateProduct(
             @PathVariable Long productId,
-            @RequestBody CreateProductDTO productDto) throws ProductNotFoundException
+            @RequestBody CreateProductDto productDto) throws ProductNotFoundException
     {
         Product product = productService.partialUpdateProduct(
                 productId,
                 productDto.toProduct()
         );
-        PatchProductResponseDTO response = new PatchProductResponseDTO();
-        response.setProduct(GetProductDTO.from(product));
+        PatchProductResponseDto response = new PatchProductResponseDto();
+        response.setProduct(GetProductDto.from(product));
 
         return response;
     }
@@ -76,7 +76,7 @@ public class ProductController {
     @PutMapping("/{id}")
     public ResponseEntity<Product> putProduct(
             @PathVariable Long id,
-            @RequestBody CreateProductDTO createProductDTO) throws ProductNotFoundException
+            @RequestBody CreateProductDto createProductDTO) throws ProductNotFoundException
     {
         Product product =productService.putProduct(id, createProductDTO.toProduct());
         return ResponseEntity.ok(product);

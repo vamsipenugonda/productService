@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class PatchProductResponseDTO {
-    private GetProductDTO product;
+public class PatchProductResponseDto {
+    private GetProductDto product;
 }

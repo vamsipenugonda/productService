@@ -2,21 +2,20 @@ package com.springboot.ProductService.dtos.Product;
 
 import com.springboot.ProductService.models.Category;
 import com.springboot.ProductService.models.Product;
-import jakarta.persistence.GeneratedValue;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateProductDTO {
+public class CreateProductDto {
     private Long id;
     private String title;
     private String description;
     private Double price;
     private String imageUrl;
     private String categoryName;
-    public  CreateProductDTO fromProduct(Product product) {
-        CreateProductDTO responseDto = new CreateProductDTO();
+    public CreateProductDto fromProduct(Product product) {
+        CreateProductDto responseDto = new CreateProductDto();
         responseDto.setId(product.getId());
         responseDto.setDescription(product.getDescription());
         responseDto.setTitle(product.getTitle());
